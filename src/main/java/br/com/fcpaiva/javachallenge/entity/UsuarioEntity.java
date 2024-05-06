@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_usuarios")
@@ -26,6 +27,7 @@ public class UsuarioEntity implements Serializable {
     private String name;
     @Column (length=255)
     private String email;
-
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<PermissoesEntity> blogList;
 
 }

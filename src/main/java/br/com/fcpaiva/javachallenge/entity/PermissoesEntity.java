@@ -20,4 +20,8 @@ public class PermissoesEntity implements Serializable {
     private Long id;
     @Column (length=255)
     private String descricao;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario_id")
+    private UsuarioEntity usuario;
 }
