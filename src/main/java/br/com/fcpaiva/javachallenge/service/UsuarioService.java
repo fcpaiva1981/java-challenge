@@ -22,7 +22,7 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public List<UsuarioDto> listarCarteiras() {
+    public List<UsuarioDto> listarUsuarios() {
         return UsuarioDto.fromEntityList(usuarioRepository.findAll(Sort.by("nome")));
     }
 
