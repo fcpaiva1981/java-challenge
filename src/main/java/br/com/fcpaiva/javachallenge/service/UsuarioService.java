@@ -5,8 +5,6 @@ import br.com.fcpaiva.javachallenge.dto.UsuarioDto;
 import br.com.fcpaiva.javachallenge.entity.UsuarioEntity;
 import br.com.fcpaiva.javachallenge.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
