@@ -22,6 +22,7 @@ public class PermissaoDto {
 
     public static PermissoesEntity toEntity(PermissaoDto permissaoDto){
         PermissoesEntity permissoesEntity = EntityOutputConvert.convert(permissaoDto, PermissoesEntity.class);
+
         return permissoesEntity;
     }
 

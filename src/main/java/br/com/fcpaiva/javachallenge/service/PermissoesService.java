@@ -35,7 +35,7 @@ public class PermissoesService {
     public PermissaoDto buscarPermissaoId(Long id) {
         PermissoesEntity permissoesEntity = permissoesRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Permissão não encontrada"));
-        PermissaoDto permissaoDto = EntityOutputConvert.convert(permissoesEntity, PermissaoDto.class);
+        PermissaoDto permissaoDto =  PermissaoDto.fromEntity(permissoesEntity);
         return permissaoDto;
     }
 
@@ -51,9 +51,14 @@ public class PermissoesService {
     public PermissaoDto atualizarPermissao(Long id, PermissaoDto permissaoDto) {
         PermissoesEntity permissoesEntity = permissoesRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Permissão não encontrada"));
-        permissaoDto.setId(permissoesEntity.getId());
-        permissoesRepository.saveAndFlush(PermissaoDto.toEntity(permissaoDto));
-        return permissaoDto;
+
+        UsuarioEntity usuario = usuarioRepository.findById(permissaoDto.getIdUsuario())
+                .orElseThrow(() -> new RuntimeException("Usuário não localizado"));
+        permissoesEntity.setDescricao(permissaoDto.getDescricao());
+        permissoesEntity.setUsuarios(usuario);
+
+        permissoesRepository.saveAndFlush(permissoesEntity);
+        return PermissaoDto.fromEntity(permissoesEntity);
     }
 
     public boolean excluirPermissao(Long id) {
