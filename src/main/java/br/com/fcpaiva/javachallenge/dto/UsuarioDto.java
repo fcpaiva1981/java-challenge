@@ -18,8 +18,7 @@ public class UsuarioDto {
     private String email;
 
     public static UsuarioEntity toEntity(UsuarioDto usuarioDto){
-        UsuarioEntity usuarioEntity = EntityOutputConvert.convert(usuarioDto, UsuarioEntity.class);
-        return usuarioEntity;
+        return EntityOutputConvert.convert(usuarioDto, UsuarioEntity.class);
     }
 
     public static List<UsuarioDto> fromEntityList(List<UsuarioEntity> usuarioEntityList) {
@@ -27,7 +26,6 @@ public class UsuarioDto {
     }
 
     public static UsuarioDto fromEntity(UsuarioEntity usuarioEntity) {
-        var usuarioDto = EntityOutputConvert.convert(usuarioEntity, UsuarioDto.class);
-        return usuarioDto;
+        return EntityOutputConvert.convert(usuarioEntity, UsuarioDto.class);
     }
 }

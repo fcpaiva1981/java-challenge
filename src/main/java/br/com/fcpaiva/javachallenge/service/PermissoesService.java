@@ -2,7 +2,6 @@ package br.com.fcpaiva.javachallenge.service;
 
 import br.com.fcpaiva.javachallenge.convert.EntityOutputConvert;
 import br.com.fcpaiva.javachallenge.dto.PermissaoDto;
-import br.com.fcpaiva.javachallenge.dto.UsuarioDto;
 import br.com.fcpaiva.javachallenge.entity.PermissoesEntity;
 import br.com.fcpaiva.javachallenge.entity.UsuarioEntity;
 import br.com.fcpaiva.javachallenge.repository.PermissoesRepository;
@@ -21,8 +20,12 @@ public class PermissoesService {
     @Autowired
     private PermissoesRepository permissoesRepository;
 
-    public PermissoesService(PermissoesRepository permissoesRepository) {
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    public PermissoesService(PermissoesRepository permissoesRepository, UsuarioRepository usuarioRepository) {
         this.permissoesRepository = permissoesRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
     public List<PermissaoDto> listarPermissoes() {
@@ -32,14 +35,17 @@ public class PermissoesService {
     public PermissaoDto buscarPermissaoId(Long id) {
         PermissoesEntity permissoesEntity = permissoesRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Permissão não encontrada"));
-        PermissaoDto  permissaoDto = EntityOutputConvert.convert(permissoesEntity, PermissaoDto.class);
+        PermissaoDto permissaoDto = EntityOutputConvert.convert(permissoesEntity, PermissaoDto.class);
         return permissaoDto;
     }
 
     public PermissaoDto salvarPermissao(PermissaoDto permissaoDto) {
-      PermissoesEntity permissoesEntity =EntityOutputConvert.convert(permissaoDto, PermissoesEntity.class);
-      PermissoesEntity permissoesEntitySalva = permissoesRepository.save(permissoesEntity);
-      return PermissaoDto.builder().id(permissoesEntitySalva.getId()).build();
+        PermissoesEntity permissoesEntity = EntityOutputConvert.convert(permissaoDto, PermissoesEntity.class);
+        UsuarioEntity usuario = usuarioRepository.findById(permissaoDto.getIdUsuario())
+                .orElseThrow(() -> new RuntimeException("Usuário não localizado"));
+        permissoesEntity.setUsuarios(usuario);
+        PermissoesEntity permissoesEntitySalva = permissoesRepository.save(permissoesEntity);
+        return PermissaoDto.fromEntity(permissoesEntitySalva);
     }
 
     public PermissaoDto atualizarPermissao(Long id, PermissaoDto permissaoDto) {
@@ -53,7 +59,7 @@ public class PermissoesService {
     public boolean excluirPermissao(Long id) {
         Optional<PermissoesEntity> permissoesEntity = permissoesRepository.findById(id);
 
-        if(permissoesEntity.isPresent()) {
+        if (permissoesEntity.isPresent()) {
             permissoesRepository.deleteById(id);
             return true;
         }

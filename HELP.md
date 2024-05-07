@@ -1,19 +1,19 @@
-# Getting Started
+# Funcionanmento da API
 
-### Reference Documentation
+### Pré-requisitos
 
-For further reference, please consider the following sections:
+* Docker
+* MySQL 8.x
+* Executar o docker-compose.yml do MySQL para instanciar o banco
+* Aplicação escrita em Java 17 
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/3.2.5/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/3.2.5/maven-plugin/reference/html/#build-image)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/3.2.5/reference/htmlsingle/index.html#web)
+### Funcionamento da API
 
-### Guides
+* Montando a imagem
+    * No path da aplicação executar o comando : docker build -f Dockerfile .
+    * Será criado uma imagem da aplicação
+* Acesso a documentação da aplicação
+  * http://localhost:8081/swagger-ui/index.html#/
 
-The following guides illustrate how to use some features concretely:
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
 

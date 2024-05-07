@@ -1,27 +1,32 @@
 package br.com.fcpaiva.javachallenge.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 @Entity
-@Table(name = "tb_privilegios")
+@Table(name = "tb_permissoes")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class PermissoesEntity implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(nullable = false)
     private Long id;
+
     @Column (length=255)
     private String descricao;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario_id")
-    private UsuarioEntity usuario;
+    @ManyToOne
+    @JoinColumn(name = "fk_usuario_id")
+    private UsuarioEntity usuarios;
 }

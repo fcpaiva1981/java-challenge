@@ -21,13 +21,13 @@ public class UsuarioEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(nullable = false)
     private Long id;
+
     @Column (length=255)
-    private String name;
+    private String nome;
+
     @Column (length=255)
     private String email;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<PermissoesEntity> blogList;
 
 }

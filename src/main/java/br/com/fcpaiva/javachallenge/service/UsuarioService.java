@@ -36,7 +36,7 @@ public class UsuarioService {
     public UsuarioDto salvarUsuarios(UsuarioDto usuarioDto) {
       UsuarioEntity usuarioEntity =EntityOutputConvert.convert(usuarioDto, UsuarioEntity.class);
       UsuarioEntity usuarioEntitySalvo = usuarioRepository.save(usuarioEntity);
-      return UsuarioDto.builder().id(usuarioEntitySalvo.getId()).build();
+      return UsuarioDto.fromEntity(usuarioEntitySalvo);
     }
 
     public UsuarioDto atualizarUsuario(Long id, UsuarioDto usuarioDto) {

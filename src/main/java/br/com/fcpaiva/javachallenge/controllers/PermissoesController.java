@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/permissoes")
+
 public class PermissoesController {
 
     private final PermissoesService permissoesService;
