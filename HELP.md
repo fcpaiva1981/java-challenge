@@ -1,10 +1,13 @@
-# Funcionanmento da API
-
-### Pré-requisitos
+### Especificações
 
 * Docker
 * MySQL 8.x
-* Aplicação escrita em Java 17 
+* Aplicação escrita em Java 17
+
+### Pré-requisitos
+* Executar o Docker Compose
+  * pasta ../../DockerCompose
+  * comando: docker-compose up -d
 
 ### Funcionamento da API
 * Acesso a documentação da aplicação

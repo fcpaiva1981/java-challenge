@@ -1,0 +1,12 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_USER: 'sample'                
+      MYSQL_PASSWORD: 'q1w2e3r4t5'          
+      MYSQL_ROOT_PASSWORD: 'q1w2e3r4t5'     
+    volumes:
+      - "./data.sql:/docker-entrypoint-initdb.d/1.sql"
+    ports:
+      - 3306:3306 
